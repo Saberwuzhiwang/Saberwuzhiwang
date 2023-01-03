@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="assets/js/echarts.js"></script>
+    <script src="assets/js/infographic.js"></script>
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+  </head>
+  <body>
+    <header id="site-header" class="fixed-top">
+      <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg stroke">
+              <!-- if logo is image enable this   
+  <a class="navbar-brand" href="#index.html">
+      <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+  </a> -->
+              <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+                  data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                  <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                  <ul class="navbar-nav ml-lg-auto">
+                      <li class="nav-item active">
+                          <a class="nav-link" href="index.html">主页 <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="动画播放量.html">播放量</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="动漫评分.html">动漫评分top</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="人物（中）.html">中国动漫人物top</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="人物(日).html">日本动漫人物top</a>
+                    </li>
+                      <!-- 搜索框-->
+                      <div class="search-right">
+                          <form action="#search" method="GET" class="search-box position-relative">
+                              <div class="input-search">
+                                  <input type="search" placeholder="Enter Keyword" name="search" required="required"
+                                      autofocus="" class="search-popup">
+                              </div>
+                              <button type="submit" class="btn search-btn"><i class="fa fa-search"
+                                      aria-hidden="true"></i></button>
+                          </form>
+                      </div>
+                      <!-- //搜索框 -->
+                  </ul>
+              </div>
+
+          </nav>
+      </div>
+  </header>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" class="main"  style="height:900px;">
+    </div>
+    <div id="main1" class="main1"  style="height:700px;top:900;">
+    </div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('main'),'infographic');
+      var myChart1 = echarts.init(document.getElementById('main1'),'infographic');
+      // 指定图表的配置项和数据
+      var option = {
+      title:{
+        top:100,
+        left:'center',
+        text:'中日2020-2022年动画播放量', 
+        textStyle:{
+          fontSize:30,
+          lineHeight:20,
+        },
+        subtext:'该图展示了中日动画分别在2020-2022年里每年播放量前三的作品的播放量情况以及其开播年份' 
+      },
+      toolbox: {
+        itemSize: 25,
+        left:1100,
+        top:200,
+    show: true,
+    feature: {
+      dataZoom: {
+        yAxisIndex: "none"
+      },
+      dataView: {
+        readOnly: false
+      },
+      magicType: {
+        type: ["line", "bar"]
+      },
+      restore: {},
+      saveAsImage: {}
+    },
+    orient: "horizontal"
+  },
+      tooltip: {
+        trigger: 'item',
+        triggerOn: 'mousemove',
+        backgroundColor :'#27727b',
+        textStyle:{
+          color:'white'
+        },
+      },
+    series: {
+      nodeWidth: 50,
+      top:300,
+      left:200,
+      type: 'sankey',
+      draggable: true,
+    layout: 'none',
+    emphasis: {
+      focus: 'adjacency'
+    },
+    data: [
+      {
+        name: '中国'
+      },
+      {
+        name: '日本'
+      },
+      {
+        name: '2020'
+      },
+      {
+        name: '2021'
+      },
+      {
+        name: '2022'
+      },
+      {
+        name: '10亿以上'
+      },
+      {
+        name: '10亿-5亿'
+      },
+      {
+        name: '5亿以下'
+      }
+    ],
+    lineStyle:{
+      color:'gradient',
+    },
+    links: [
+      {
+        source: '中国',
+        target: '10亿以上',
+        value: 3
+      },
+      {
+        source: '中国',
+        target: '10亿-5亿',
+        value: 4
+      },
+      {
+        source: '中国',
+        target: '5亿以下',
+        value: 2
+      },
+    
+      {
+        source: '日本',
+        target: '10亿-5亿',
+        value: 2
+      },
+      {
+        source: '日本',
+        target: '5亿以下',
+        value: 7
+      },
+      {
+        source: '10亿以上',
+        target: '2020',
+        value: 2
+      },
+      {
+        source: '10亿以上',
+        target: '2021',
+        value: 1
+      },
+    
+      {
+        source: '10亿-5亿',
+        target: '2020',
+        value:2
+      },
+      {
+        source: '10亿-5亿',
+        target: '2021',
+        value:1
+      },
+      {
+        source: '10亿-5亿',
+        target: '2022',
+        value:3
+      },
+      {
+        source: '5亿以下',
+        target: '2020',
+        value:2
+      },
+      {
+        source: '5亿以下',
+        target: '2021',
+        value:4
+      },
+      {
+        source: '5亿以下',
+        target: '2022',
+        value:3
+      },
+    
+    ]
+  }
+};
+      var option1={
+      title:{
+       top:20,
+        left:'center',
+        text:'2018-2022每年播放量前3作品', 
+        textStyle:{
+          fontSize:30,
+          lineHeight:20,
+        },
+        subtext:'在2018有许多优秀的作品涌现,以下是比较出名的几部动画作品在这2018-2022年里的播放量情况,单位/亿' 
+      },
+      toolbox: {
+        itemSize: 25,
+        left:1300,
+        top:150,
+    show: true,
+    feature: {
+      dataZoom: {
+        yAxisIndex: "none"
+      },
+      dataView: {
+        readOnly: false
+      },
+      magicType: {
+        type: ["line", "bar"]
+      },
+      restore: {},
+      saveAsImage: {}
+    },
+    orient: "horizontal"
+  },
+     tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      // Use axis to trigger tooltip
+      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+    }
+  },
+  legend: {
+    top:120
+  },
+  grid: {
+  top:200,
+    containLabel: true
+  },
+  xAxis: {
+    type: 'value'
+  },
+  yAxis: {
+    type: 'category',
+    data: ['2022', '2021', '2020', '2019', '2018']
+  },
+  series: [
+    {
+      top:200,
+      name: '紫罗兰的永恒花园',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [,,,,1.8]
+    },
+    {
+      name: '工作细胞',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [,,,,2.4]
+    },
+    {
+      name: '伍六七',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [,4.2,,,3.4]
+    },
+    {
+      name: '鬼灭之刃',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [2.1,1.7,,9.1, ]
+    },
+    {
+      name: '灵笼',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [,,,5.7,]
+    },
+    {
+      name: '辉夜大小姐',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [,,,2.8,]
+    },
+    {
+      name: '咒术回战',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [,,7.5,,]
+    },
+    {
+      name: '一人之下',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [,,3.5,,]
+    },
+    {
+      name: '天官赐福',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [,,5,,]
+    },
+    {
+      name: '国王排名',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [,4.9,,,]
+    },
+    {
+      name: '间谍过家家',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [6,,,,]
+    },
+    {
+      name: '三体',
+      type: 'bar',
+      stack: 'total',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [2.5,,,,]
+    },
+  ]
+}
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+      myChart1.setOption(option1);
+  window.onresize=function(){
+    myChart.resize();
+  }
+</script>
+  </body>
+</html>

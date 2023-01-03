@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="assets/js/echarts.js"></script>
+    <script src="assets/js/infographic.js"></script>
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+  </head>
+  <body>
+    <header id="site-header" class="fixed-top">
+      <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg stroke">
+              <!-- if logo is image enable this   
+  <a class="navbar-brand" href="#index.html">
+      <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+  </a> -->
+              <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+                  data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                  <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo02"  style="background-color:rgba(128, 128, 128, 0.17)">
+                  <ul class="navbar-nav ml-lg-auto">
+                      <li class="nav-item active" >
+                          <a class="nav-link" href="index.html">主页 <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="动画播放量.html">播放量</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="动漫评分.html">动漫评分top</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="人物（中）.html">中国动漫人物top</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="人物(日).html">日本动漫人物top</a>
+                    </li>
+                      <!-- 搜索框-->
+                      <div class="search-right">
+                          <form action="#search" method="GET" class="search-box position-relative">
+                              <div class="input-search">
+                                  <input type="search" placeholder="Enter Keyword" name="search" required="required"
+                                      autofocus="" class="search-popup">
+                              </div>
+                              <button type="submit" class="btn search-btn"><i class="fa fa-search"
+                                      aria-hidden="true"></i></button>
+                          </form>
+                      </div>
+                      <!-- //搜索框 -->
+                  </ul>
+              </div>
+
+          </nav>
+      </div>
+  </header>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" style="height:900px;top:100px;"></div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('main'));
+      // 指定图表的配置项和数据
+      option = {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  title: {
+          text: '中国动画中常被搜索的人物',
+          subtext: '按人物出现的作品数分布'
+        },
+        legend: {
+          left:'40%',
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: ['Weibo', 'Baidu', 'Xunlei', 'Zhihu', 'Douyin', 'Tencent', 'Bilibili']
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: '刺客阿7',
+      type: 'bar',
+      emphasis: {
+        focus: 'series'
+      },
+      data: [320, 332, 301, 334, 390, 330, 320]
+    },
+    {
+      name: '新神榜杨戬',
+      type: 'bar',
+      stack: 'Ad',
+      emphasis: {
+        focus: 'series'
+      },
+      data: [120, 132, 101, 134, 90, 230, 210]
+    },
+    {
+      name: '新神榜哪吒',
+      type: 'bar',
+      stack: 'Ad',
+      emphasis: {
+        focus: 'series'
+      },
+      data: [220, 182, 191, 234, 290, 330, 310]
+    },
+    {
+      name: '新神榜姜子牙',
+      type: 'bar',
+      stack: 'Ad',
+      emphasis: {
+        focus: 'series'
+      },
+      data: [150, 232, 201, 154, 190, 330, 410]
+    },
+    {
+      name: '孙悟空',
+      type: 'bar',
+      data: [862, 1018, 964, 1026, 1679, 1600, 1570],
+      emphasis: {
+        focus: 'series'
+      },
+      markLine: {
+        lineStyle: {
+          type: 'dashed'
+        },
+        data: [[{ type: 'min' }, { type: 'max' }]]
+      }
+    },
+    {
+      name: '椿',
+      type: 'bar',
+
+      emphasis: {
+        focus: 'series'
+      },
+      data: [620, 732, 701, 734, 1090, 1130, 1120]
+    },
+    {
+      name: '罗辑',
+      type: 'bar',
+      stack: 'Search Engine',
+      emphasis: {
+        focus: 'series'
+      },
+      data: [120, 132, 101, 134, 290, 230, 220]
+    },
+
+  ]
+};
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+  </body>
+</html>

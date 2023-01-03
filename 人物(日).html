@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="assets/js/echarts.js"></script>
+    <script src="assets/js/infographic.js"></script>
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+  </head>
+  <body>
+    <header id="site-header" class="fixed-top">
+      <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg stroke">
+              <!-- if logo is image enable this   
+  <a class="navbar-brand" href="#index.html">
+      <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+  </a> -->
+              <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+                  data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                  <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo02"  style="background-color:rgba(128, 128, 128, 0.17)">
+                  <ul class="navbar-nav ml-lg-auto">
+                      <li class="nav-item active" >
+                          <a class="nav-link" href="index.html">主页 <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="动画播放量.html">播放量</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="动漫评分.html">动漫评分top</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="人物（中）.html">中国动漫人物top</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="人物(日).html">日本动漫人物top</a>
+                    </li>
+                      <!-- 搜索框-->
+                      <div class="search-right">
+                          <form action="#search" method="GET" class="search-box position-relative">
+                              <div class="input-search">
+                                  <input type="search" placeholder="Enter Keyword" name="search" required="required"
+                                      autofocus="" class="search-popup">
+                              </div>
+                              <button type="submit" class="btn search-btn"><i class="fa fa-search"
+                                      aria-hidden="true"></i></button>
+                          </form>
+                      </div>
+                      <!-- //搜索框 -->
+                  </ul>
+              </div>
+
+          </nav>
+      </div>
+  </header>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" style="height:900px;top:100px;"></div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('main'));
+      // 指定图表的配置项和数据
+// prettier-ignore
+let dataAxis = ['炭之郎', '五条悟', '阿妮亚', '四宫辉夜', '白银御时', '路飞', '鸣人', '佐助', '索隆', '卡卡西'];
+// prettier-ignore
+let data = [700, 987, 886, 536, 329, 1800, 763, 798,1080, 321];
+let yMax = 500;
+let dataShadow = [];
+for (let i = 0; i < data.length; i++) {
+  dataShadow.push(yMax);
+}
+option = {
+  title: {
+    text: '日番中常被搜索的人物',
+    subtext: '按查询次数分布/单位:万'
+  },
+  xAxis: {
+    data: dataAxis,
+    axisLabel: {
+      inside: true,
+      color: '#c1232b'
+    },
+    axisTick: {
+      show: false
+    },
+    axisLine: {
+      show: false
+    },
+    z: 10
+  },
+  yAxis: {
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      color: '#27727b'
+    }
+  },
+  dataZoom: [
+    {
+      type: 'inside'
+    }
+  ],
+  series: [
+    {
+      type: 'bar',
+      showBackground: true,
+      itemStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: '#83bff6' },
+          { offset: 0.5, color: '#188df0' },
+          { offset: 1, color: '#fcce10' }
+        ])
+      },
+      emphasis: {
+        itemStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: '#e87c25' },
+            { offset: 0.7, color: '#2378f7' },
+            { offset: 1, color: '#b5c334' }
+          ])
+        }
+      },
+      data: data
+    }
+  ]
+};
+// Enable data zoom when user click bar.
+const zoomSize = 6;
+myChart.on('click', function (params) {
+  console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+  myChart.dispatchAction({
+    type: 'dataZoom',
+    startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+    endValue:
+      dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+  });
+});
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+  </body>
+</html>

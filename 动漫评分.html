@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="assets/js/echarts.js"></script>
+    <script src="assets/js/infographic.js"></script>
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+  </head>
+  <body> 
+    <header id="site-header" class="fixed-top">
+      <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg stroke">
+              <!-- if logo is image enable this   
+  <a class="navbar-brand" href="#index.html">
+      <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+  </a> -->
+              <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+                  data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                  <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo02"  style="background-color:rgba(128, 128, 128, 0.17)">
+                  <ul class="navbar-nav ml-lg-auto">
+                      <li class="nav-item active" >
+                          <a class="nav-link" href="index.html">主页 <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="动画播放量.html">播放量</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="动漫评分.html">动漫评分top</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="人物（中）.html">中国动漫人物top</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="人物(日).html">日本动漫人物top</a>
+                    </li>
+                      <!-- 搜索框-->
+                      <div class="search-right">
+                          <form action="#search" method="GET" class="search-box position-relative">
+                              <div class="input-search">
+                                  <input type="search" placeholder="Enter Keyword" name="search" required="required"
+                                      autofocus="" class="search-popup">
+                              </div>
+                              <button type="submit" class="btn search-btn"><i class="fa fa-search"
+                                      aria-hidden="true"></i></button>
+                          </form>
+                      </div>
+                      <!-- //搜索框 -->
+                  </ul>
+              </div>
+
+          </nav>
+      </div>
+  </header>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" style="width:1450px;height:600px;top:100px;"></div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('main'));
+      // 指定图表的配置项和数据
+      var chartDom = document.getElementById('main');
+var myChart = echarts.init(chartDom);
+var option;
+
+const labelRight = {
+  position: 'right'
+};
+option = {
+  title: {
+    text: '中日动漫评分top10'
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    top: 80,
+    bottom: 30
+  },
+  xAxis: {
+    type: 'value',
+    position: 'top',
+    splitLine: {
+      lineStyle: {
+        type: 'dashed'
+      }
+    }
+  },
+  yAxis: {
+    type: 'category',
+    axisLine: { show: false },
+    axisLabel: { show: false },
+    axisTick: { show: false },
+    splitLine: { show: false },
+    data: [
+      '进击的巨人 Ⅳ',
+      '超兽武装',
+      '黄金神威 Ⅲ',
+      '眷思量',
+      '凡人修仙传',
+      '辉夜大小姐 Ⅱ',
+      '灵笼',
+      '一人之下',
+      '不良人',
+      '狐妖小红娘',
+      '某科学的超电磁炮T',
+      '刺客伍六七',
+      '魔道祖师',
+      '完美世界',
+      '别对映像研出手',
+      '咒术回战',
+      '排球少年 Ⅳ',
+      '阿松 Ⅲ',
+      'The run',
+      '王者天下 Ⅲ'
+    ]
+  },
+  series: [
+    {
+      name: 'Cost',
+      type: 'bar',
+      stack: 'Total',
+      label: {
+        show: true,
+        formatter: '{b}'
+      },
+      data: [
+        9.8,
+        { value: -9.6, label: labelRight },
+        9.6,
+        { value: -8.0, label: labelRight },
+        { value: -8.1, label: labelRight },
+        9.4,
+        { value: -8.3, label: labelRight },
+        { value: -8.8, label: labelRight },
+        { value: -8.8, label: labelRight },
+        { value: -8.9, label: labelRight },
+        9.2,
+        { value: -8.9, label: labelRight },
+        { value: -8.9, label: labelRight },
+        { value: -9.0, label: labelRight },
+        9.4,
+        9.2,
+        9.2,
+        9.2,
+        9.2,
+        9.2
+      ]
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+window.onresize=function(){
+    myChart.resize();
+  }
+    </script>
+  </body>
+</html>
