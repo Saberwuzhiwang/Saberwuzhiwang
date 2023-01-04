@@ -59,112 +59,125 @@
       </div>
   </header>
     <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-    <div id="main" style="height:725px;"></div>
+    <div id="main" style="height:900px;"></div>
     <script type="text/javascript">
       // 基于准备好的dom，初始化echarts实例
       var myChart = echarts.init(document.getElementById('main'),'infographic');
+
       // 指定图表的配置项和数据
-
-      var chartDom = document.getElementById('main');
-var myChart = echarts.init(chartDom);
-var option;
-
-const labelRight = {
-  position: 'right'
-};
-option = {
-  title: {
-    text: '中日动漫评分top10',
-    bottom:'86%'
-  },
+      option = {
   tooltip: {
     trigger: 'axis',
     axisPointer: {
-      type: 'shadow'
+      type: 'shadow',
     }
+  },
+  title: {
+          text: '中国动画中常被搜索的人物',
+          subtext: '搜索数据单位：万',
+          bottom:'90%'
+        },
+        legend: {
+          left:'40%',
   },
   grid: {
-    top: 140,
-    bottom: 0
+    left: '3%',
+    right: '4%',
+    bottom: '5%',
+    top:'120px',
+    containLabel: true
   },
-  xAxis: {
-    type: 'value',
-    position: 'top',
-    splitLine: {
-      lineStyle: {
-        type: 'dashed'
-      }
+  legend:{
+    right:'5%',
+    top:'60px'
+  },
+  xAxis: [
+    {
+      type: 'category',
+      data: ['Weibo', 'Baidu', 'Xunlei', 'Zhihu', 'Douyin', 'Tencent', 'Bilibili']
     }
-  },
-  yAxis: {
-    type: 'category',
-    axisLine: { show: false },
-    axisLabel: { show: false },
-    axisTick: { show: false },
-    splitLine: { show: false },
-    data: [
-      '进击的巨人 Ⅳ',
-      '超兽武装',
-      '黄金神威 Ⅲ',
-      '眷思量',
-      '凡人修仙传',
-      '辉夜大小姐 Ⅱ',
-      '灵笼',
-      '一人之下',
-      '不良人',
-      '狐妖小红娘',
-      '某科学的超电磁炮T',
-      '刺客伍六七',
-      '魔道祖师',
-      '完美世界',
-      '别对映像研出手',
-      '咒术回战',
-      '排球少年 Ⅳ',
-      '阿松 Ⅲ',
-      'The run',
-      '王者天下 Ⅲ'
-    ]
-  },
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
   series: [
     {
-      name: 'Cost',
+      name: '刺客阿7',
       type: 'bar',
-      stack: 'Total',
-      label: {
-        show: true,
-        formatter: '{b}'
+      emphasis: {
+        focus: 'series'
       },
-      data: [
-        9.8,
-        { value: -9.6, label: labelRight },
-        9.6,
-        { value: -8.0, label: labelRight },
-        { value: -8.1, label: labelRight },
-        9.4,
-        { value: -8.3, label: labelRight },
-        { value: -8.8, label: labelRight },
-        { value: -8.8, label: labelRight },
-        { value: -8.9, label: labelRight },
-        9.2,
-        { value: -8.9, label: labelRight },
-        { value: -8.9, label: labelRight },
-        { value: -9.0, label: labelRight },
-        9.4,
-        9.2,
-        9.2,
-        9.2,
-        9.2,
-        9.2
-      ]
-    }
+      data: [320, 332, 301, 334, 390, 330, 320]
+    },
+    {
+      name: '新神榜杨戬',
+      type: 'bar',
+      stack: 'Ad',
+      emphasis: {
+        focus: 'series'
+      },
+      data: [120, 132, 101, 134, 90, 230, 210]
+    },
+    {
+      name: '新神榜哪吒',
+      type: 'bar',
+      stack: 'Ad',
+      emphasis: {
+        focus: 'series'
+      },
+      data: [220, 182, 191, 234, 290, 330, 310]
+    },
+    {
+      name: '新神榜姜子牙',
+      type: 'bar',
+      stack: 'Ad',
+      emphasis: {
+        focus: 'series'
+      },
+      data: [150, 232, 201, 154, 190, 330, 410]
+    },
+    {
+      name: '孙悟空',
+      type: 'bar',
+      data: [862, 1018, 964, 1026, 1679, 1600, 1570],
+      emphasis: {
+        focus: 'series'
+      },
+      markLine: {
+        lineStyle: {
+          type: 'dashed'
+        },
+        data: [[{ type: 'min' }, { type: 'max' }]]
+      }
+    },
+    {
+      name: '雾山火行',
+      type: 'bar',
+
+      emphasis: {
+        focus: 'series'
+      },
+      data: [620, 732, 701, 734, 1090, 1130, 1120]
+    },
+    {
+      name: '罗辑',
+      type: 'bar',
+      stack: 'Search Engine',
+      emphasis: {
+        focus: 'series'
+      },
+      data: [120, 132, 101, 134, 290, 230, 220]
+    },
   ]
 };
 
-option && myChart.setOption(option);
-window.onresize=function(){
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+      window.onresize=function(){
     myChart.resize();
   }
-
 
     </script>
   </body>

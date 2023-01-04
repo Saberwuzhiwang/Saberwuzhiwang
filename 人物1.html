@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>ECharts</title>
-    <!-- 引入刚刚下载的 ECharts 文件 -->
+
+	<head>
+		<meta charset="utf-8">
+		<title>ECharts</title>
+		<!-- 引入 echarts.js -->
     <script src="assets/js/echarts.js"></script>
     <script src="assets/js/infographic.js"></script>
     <link rel="stylesheet" href="assets/css/style-starter.css">
-  </head>
-  <body>
+	</head>
+
+	<body>
     <header id="site-header" class="fixed-top">
       <div class="container-fluid">
           <nav class="navbar navbar-expand-lg stroke">
@@ -58,114 +60,109 @@
           </nav>
       </div>
   </header>
-    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-    <div id="main" style="height:725px;"></div>
-    <script type="text/javascript">
-      // 基于准备好的dom，初始化echarts实例
-      var myChart = echarts.init(document.getElementById('main'),'infographic');
-      // 指定图表的配置项和数据
-
-      var chartDom = document.getElementById('main');
-var myChart = echarts.init(chartDom);
-var option;
-
-const labelRight = {
-  position: 'right'
-};
+		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+		<div id="main" style="height:800px;"></div>
+		<script type="text/javascript">
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('main'),'infographic');
+			var option;
+			// prettier-ignore
+let dataAxis = ['炭之郎', '五条悟', '阿妮亚', '四宫辉夜', '白银御时', '路飞', '鸣人', '佐助', '索隆', '卡卡西'];
+// prettier-ignore
+let data = [700, 987, 886, 536, 329, 1800, 763, 798,1080, 321];
+let yMax = 500;
+let dataShadow = [];
+for (let i = 0; i < data.length; i++) {
+  dataShadow.push(yMax);
+}
 option = {
-  title: {
-    text: '中日动漫评分top10',
-    bottom:'86%'
-  },
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
+   title: {
+          text: '日本动画中常被搜索的人物',
+          subtext: '搜索数据单位：万',
+          bottom:'90%'
+        },
+        legend: {
+          left:'40%',
   },
   grid: {
-    top: 140,
-    bottom: 0
+    left: '3%',
+    right: '4%',
+    bottom: '5%',
+    top:'120px',
+    containLabel: true
   },
   xAxis: {
-    type: 'value',
-    position: 'top',
-    splitLine: {
-      lineStyle: {
-        type: 'dashed'
-      }
-    }
+    data: dataAxis,
+    axisLabel: {
+      inside: true,
+      color: '#c1232b'
+    },
+    axisTick: {
+      show: false
+    },
+    axisLine: {
+      show: false
+    },
+    z: 10
   },
   yAxis: {
-    type: 'category',
-    axisLine: { show: false },
-    axisLabel: { show: false },
-    axisTick: { show: false },
-    splitLine: { show: false },
-    data: [
-      '进击的巨人 Ⅳ',
-      '超兽武装',
-      '黄金神威 Ⅲ',
-      '眷思量',
-      '凡人修仙传',
-      '辉夜大小姐 Ⅱ',
-      '灵笼',
-      '一人之下',
-      '不良人',
-      '狐妖小红娘',
-      '某科学的超电磁炮T',
-      '刺客伍六七',
-      '魔道祖师',
-      '完美世界',
-      '别对映像研出手',
-      '咒术回战',
-      '排球少年 Ⅳ',
-      '阿松 Ⅲ',
-      'The run',
-      '王者天下 Ⅲ'
-    ]
+    axisLine: {
+      show: false
+    },
+    axisTick: {
+      show: false
+    },
+    axisLabel: {
+      color: '#27727b'
+    }
   },
+  dataZoom: [
+    {
+      type: 'inside'
+    }
+  ],
   series: [
     {
-      name: 'Cost',
       type: 'bar',
-      stack: 'Total',
-      label: {
-        show: true,
-        formatter: '{b}'
+      showBackground: true,
+      itemStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: '#83bff6' },
+          { offset: 0.5, color: '#188df0' },
+          { offset: 1, color: '#fcce10' }
+        ])
       },
-      data: [
-        9.8,
-        { value: -9.6, label: labelRight },
-        9.6,
-        { value: -8.0, label: labelRight },
-        { value: -8.1, label: labelRight },
-        9.4,
-        { value: -8.3, label: labelRight },
-        { value: -8.8, label: labelRight },
-        { value: -8.8, label: labelRight },
-        { value: -8.9, label: labelRight },
-        9.2,
-        { value: -8.9, label: labelRight },
-        { value: -8.9, label: labelRight },
-        { value: -9.0, label: labelRight },
-        9.4,
-        9.2,
-        9.2,
-        9.2,
-        9.2,
-        9.2
-      ]
+      emphasis: {
+        itemStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: '#e87c25' },
+            { offset: 0.7, color: '#2378f7' },
+            { offset: 1, color: '#b5c334' }
+          ])
+        }
+      },
+      data: data
     }
   ]
 };
+// Enable data zoom when user click bar.
+const zoomSize = 6;
+myChart.on('click', function (params) {
+  console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+  myChart.dispatchAction({
+    type: 'dataZoom',
+    startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+    endValue:
+      dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+  });
+});
 
-option && myChart.setOption(option);
-window.onresize=function(){
+			myChart.setOption(option);
+      window.onresize=function(){
     myChart.resize();
   }
 
+		</script>
+	</body>
 
-    </script>
-  </body>
 </html>
